@@ -1,6 +1,9 @@
 <template>
   <section class="section" id="app">
-    <div class="control">
+    <div class="container">
+      <div class="has-text-centered">
+        <img src="img/logo.png" alt="" class="section__logo">
+      </div>
       <router-view></router-view>
     </div>
   </section>
@@ -16,3 +19,10 @@ export default {
   }
 }
 </script>
+
+
+<style>
+  .container {
+    max-width: 320px;
+  }
+</style>

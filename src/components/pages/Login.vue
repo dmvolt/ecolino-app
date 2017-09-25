@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <p><a class="button is-success" @click="loginUser">Войти в систему</a></p>
+    <p  class="has-text-centered"><a class="button is-success" @click="loginUser">Войти в систему</a></p>
   </div>
 </template>
 

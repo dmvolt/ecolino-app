@@ -67,6 +67,7 @@ export default {
 
       if(localStorage.user){
         localStorage.removeItem("user")
+        alert('hello world!');
         //загружаем компонент login
         this.$router.push('/login')
 
@@ -90,3 +91,8 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
+
