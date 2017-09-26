@@ -1,38 +1,54 @@
 <template>
-  <div>
   <div class="card" v-if="pageData">
-    <header class="card-header">
-      <p class="card-header-title">
-        Адрес: {{ pageData.address }}
-      </p>
-    </header>
-    <div class="card-content">
-      <div class="content">
-        <p>Дата: {{ pageData.date_service }}</p>
-        <p>Время: {{ pageData.time_service }}</p>
-        <p>Тип уборки: {{ pageData.service_name }}</p>
-        <p>Оплата: {{ pageData.payment_name }}</p>
+    <div class="card-top">
+      <div class="card-status" v-if="pageData.visible">
+         <svg class="svg-icon"><use href="img/sprite.svg#lime"></use></svg > Просмотрено
+      </div>
+      <div class="card-status" v-else>
+        <svg class="svg-icon"><use href="img/sprite.svg#ex"></use></svg > Новое
+      </div>
+      <svg class="svg-icon"><use href="img/sprite.svg#calendar"></use></svg > <time datetime="2016-1-1">{{ pageData.date_service }}</time>
+      <svg class="svg-icon"><use href="img/sprite.svg#clock"></use></svg > <time datetime="2016-1-1">{{ pageData.time_service }}</time>
+    </div>
 
-        <h3>Состав работ:</h3>
+    <div class="card-line">
+      <svg class="svg-icon"><use href="img/sprite.svg#house"></use></svg > {{ pageData.address }}
+    </div>
 
-        <p v-for="work in pageData.work"> <span v-if="work.is_main">Планировка</span><span v-else>Дополнительно</span> {{ work.count }} {{ work.option_name }}</p>
-        <h3>Оплата: {{ pageData.total }} рублей</h3>
+    <div class="card-line">
+      <svg class="svg-icon"><use href="img/sprite.svg#trash"></use></svg > Тип уборки: {{ pageData.service_name }}
+    </div>
+
+    <div class="card-line">
+      <svg class="svg-icon"><use href="img/sprite.svg#money"></use></svg > Оплата: {{ pageData.payment_name }}
+    </div>
+
+    <div class="card-line">
+      <svg class="svg-icon"><use href="img/sprite.svg#cleaner"></use></svg > Состав работ:
+      <div class="card-work">
+        <p v-for="work in pageData.work">{{ work.count }} {{ work.option_name }}</p>
       </div>
     </div>
-    <footer class="card-footer" v-if="$route.params.contentType == 'my'">
-      <a @click="conflictOrder" class="card-footer-item is-danger"> Конф.</a>
-      <a @click="failOrder" class="card-footer-item is-warning"> Отказ</a>
-      <a @click="doneOrder" class="card-footer-item is-primary"> Вып.</a>
+
+    <div class="card-line">
+      <svg class="svg-icon"><use href="img/sprite.svg#rub"></use></svg > <b>{{ pageData.total }} руб.</b>
+    </div>
+
+    <footer class="card-footer card-footer--buttons" v-if="$route.params.contentType == 'my'">
+      <a @click="conflictOrder" class="button is-danger is-small"> конфликт</a>
+      <a @click="failOrder" class="button is-info is-small"> отказаться</a>
+      <a @click="doneOrder" class="button is-primary is-small"> выполнено</a>
     </footer>
-    <footer class="card-footer" v-else-if="$route.params.contentType == 'new'">
-      <a @click="preFailOrder" class="card-footer-item is-warning"> Отказаться</a>
-      <a @click="acceptOrder" class="card-footer-item is-primary"> Принять</a>
+
+    <footer class="card-footer card-footer--buttons" v-else-if="$route.params.contentType == 'new'">
+      <a @click="preFailOrder" class="button is-info"><svg class="svg-icon"><use href="img/sprite.svg#no"></use></svg > Скрыть</a>
+      <a @click="acceptOrder" class="button is-primary"><svg class="svg-icon"><use href="img/sprite.svg#status-3"></use></svg > Принять</a>
     </footer>
   </div>
+
   <div class="card" v-else>
     что то не то!
   </div>
-</div>
 </template>
 
 <script>

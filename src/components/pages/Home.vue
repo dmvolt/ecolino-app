@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="tabs is-centered">
+    <div class="tabs is-fullwidth is-toggle">
       <ul>
-        <li :class="isNew ? 'is-active' : ''"><a @click="isMy = false; isNew = true">Новые заказы</a></li>
-        <li :class="isMy ? 'is-active' : ''"><a @click="isNew = false; isMy = true">Ваши заказы</a></li>
+        <li :class="isNew ? 'is-active' : ''"><a @click="isMy = false; isNew = true"><svg class="svg-icon"><use href="img/sprite.svg#lime"></use></svg> Новые</a></li>
+        <li :class="isMy ? 'is-active' : ''"><a @click="isNew = false; isMy = true"><svg class="svg-icon"><use href="img/sprite.svg#leaf"></use></svg> Мои заявки</a></li>
       </ul>
     </div>
 
@@ -91,8 +91,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
-

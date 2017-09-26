@@ -1,23 +1,20 @@
 <template>
-  <div class="card">
-    <header class="card-header">
-      <p class="card-header-title" v-if="order.visible">
-        {{ order.address }} Просмотрено
-      </p>
-      <p class="card-header-title" v-else>
-        {{ order.address }} Совсем новое
-      </p>
-    </header>
-    <div class="card-content">
-      <div class="content">
-        <time datetime="2016-1-1">{{ order.date_service }}</time>
-        <time datetime="2016-1-1">{{ order.time_service }}</time>
-      </div>
+  <router-link class="card card--small" :to="{ name: 'View', params: { contentType: contentType, id: index }}">
+    <div class="card-top">
+      <div class="card-status" v-if="order.visible">
+           <svg class="svg-icon"><use href="img/sprite.svg#lime"></use></svg > Просмотрено
+        </div>
+        <div class="card-status" v-else>
+          <svg class="svg-icon"><use href="img/sprite.svg#ex"></use></svg > Новое
+        </div>
+        <svg class="svg-icon"><use href="img/sprite.svg#calendar"></use></svg > <time datetime="2016-1-1">{{ order.date_service }}</time>
+        <svg class="svg-icon"><use href="img/sprite.svg#clock"></use></svg > <time datetime="2016-1-1">{{ order.time_service }}</time>
     </div>
+
     <footer class="card-footer">
-      <router-link class="card-footer-item" :to="{ name: 'View', params: { contentType: contentType, id: index }}">подробнее</router-link>
+      <svg class="svg-icon"><use href="img/sprite.svg#house"></use></svg > {{ order.address }}
     </footer>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -26,9 +23,3 @@ export default {
   props: ['order', 'index', 'content-type']
 }
 </script>
-
-<style>
-  .card {
-    margin-bottom: 25px;
-  }
-</style>
